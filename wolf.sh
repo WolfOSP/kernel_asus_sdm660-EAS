@@ -101,7 +101,7 @@ fi
 
 curl -s -X POST https://api.telegram.org/bot$BOT_API_KEY/sendMessage -d text="#Awoo 
 Build Scheduled for $KERNELNAME Kernel 
-Will be posted when testing is over.." -d chat_id="-1001287030751"
+Will be posted when testing is over.." -d chat_id="585730571"
 ${MAKE} $DEFCONFIG;
 START=$(date +"%s");
 echo -e "Using ${JOBS} threads to compile"
