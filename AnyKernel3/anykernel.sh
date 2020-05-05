@@ -43,6 +43,30 @@ dump_boot;
 # Backup init.rc
 backup_file init.rc;
 
+# Ramdisk Removal & Injection  -- credit to Mr. Overdose
+rm -rf $ramdisk/init.trb.rc;
+rm -rf $ramdisk/init.azure.rc;
+rm -rf $ramdisk/init.Pbh.rc;
+rm -rf $ramdisk/init.PbH.rc;
+rm -rf $ramdisk/init.darkonah.rc;
+rm -rf $ramdisk/init.spectrum.rc;
+rm -rf $ramdisk/init.spectrum.sh;
+rm -rf $ramdisk/init.special_power.sh;
+rm -rf $ramdisk/init.thundercloud.rc;
+rm -rf $ramdisk/init.thundercloud.sh;
+
+remove_line init.rc "import /init.trb.rc"
+remove_line init.rc "import /init.azure.rc"
+remove_line init.rc "import /init.PbH.rc"
+remove_line init.rc "import /init.Pbh.rc"
+remove_line init.rc "import /init.darkonah.rc"
+remove_line init.rc "import /init.overdose.rc"
+remove_line init.rc "import /init.thundercloud.rc"
+remove_line init.rc "import /init.spectrum.rc"
+remove_line init.rc "import /init.pk.rc"
+remove_line init.rc "import /init.boost.rc"
+remove_line init.rc "import /init.stardust.rc"
+
 
 # end ramdisk changes
 
