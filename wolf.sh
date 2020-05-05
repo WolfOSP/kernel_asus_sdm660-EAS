@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export TZ="UTC";
+export TZ="Asia/Kolkata";
 
 # Kernel compiling script
 
@@ -35,7 +35,6 @@ if [[ -z ${DEVICE} ]]; then
     export DEVICE="X00T";
 fi
 
-mkdir -p ${KERNELDIR}/aroma
 mkdir -p ${KERNELDIR}/files
 
 export SRCDIR="${KERNELDIR}";
@@ -44,9 +43,9 @@ export ANYKERNEL="${KERNELDIR}/AnyKernel3/";
 export AROMA="${KERNELDIR}/aroma/";
 export ARCH="arm64";
 export SUBARCH="arm64";
-export KBUILD_BUILD_USER="ADevDX"
-export KBUILD_BUILD_HOST="TeamQuantum"
-export TOOLCHAIN="${HOME}/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/";
+export KBUILD_BUILD_USER="Wolf"
+export KBUILD_BUILD_HOST="WolfOSP"
+export TOOLCHAIN="${HOME}/gcc-arm-9.2-2019.12-x86_64-aarch64-none-linux-gnu";
 export DEFCONFIG="X00T_defconfig";
 export ZIP_DIR="${HOME}/${KERNELDIR}/files";
 export IMAGE="${OUTDIR}/arch/${ARCH}/boot/Image.gz-dtb";
@@ -57,7 +56,6 @@ export CLANG_TRIPLE=aarch64-linux-gnu-
 export CLANG_LD_PATH=$HOME/clang/lib
 export LLVM_DIS=$HOME/clang/bin/llvm-dis
 
-export MAKE_TYPE="Treble"
 
 if [[ -z "${JOBS}" ]]; then
     export JOBS="$(nproc --all)";
@@ -70,7 +68,7 @@ export TCVERSION1="$(${CROSS_COMPILE}gcc --version | head -1 |\
 awk -F '(' '{print $2}' | awk '{print tolower($1)}')"
 export TCVERSION2="$(${CROSS_COMPILE}gcc --version | head -1 |\
 awk -F ')' '{print $2}' | awk '{print tolower($1)}')"
-export ZIPNAME="${KERNELNAME}-${DEVICE}-$(date +%Y%m%d-%H%M).zip"
+export ZIPNAME="${KERNELNAME}-$(date +%Y%m%d-%H%M).zip"
 export FINAL_ZIP="${ZIP_DIR}/${ZIPNAME}"
 
 [ ! -d "${ZIP_DIR}" ] && mkdir -pv ${ZIP_DIR}
@@ -147,12 +145,11 @@ curl -F chat_id=$CHAT_ID -F document=@"${ZIP_DIR}/$ZIPNAME" -F caption="
 ♔♔♔♔♔♔♔BUILD-DETAILS♔♔♔♔♔♔♔
   Make-Type  : HMP(non-SAR)
 ⌚ Build-Time : $time
+
 $(git log --pretty=format:'%h : %s' -5)" https://api.telegram.org/bot$BOT_API_KEY/sendDocument
 
 function transfer() {
-	op1=$(curl --upload-file $ZIP_DIR/$ZIPNAME https://transfer.sh/)
 	op2=$(curl -F file=@$ZIP_DIR/$ZIPNAME https://0x0.st)
-	echo "transfer.sh -> "$op1
 	echo "0x0.st ------> "$op2
 }
 
